@@ -8,6 +8,32 @@ Jalankan perintah di bawah di folder aplikasi:
 mim app install api-object-filter
 ```
 
+## Penggunaan
+
+Module ini menerima filter object lain yang disediakan oleh module lain.
+Untuk library penyedia object filter, harus mendaftarkan diri pada konfigurasi
+aplikasi seperti di bawah dan membuatkan class yang mengimplementasikan
+interface `\ApiObjectFilter\Iface\ObjectFilter`:
+
+```php
+return [
+    'apiObjectFilter' => [
+        'filters' => [
+            'handlers' => [
+                '/name/' => '/Class/',
+                'timezone' => 'ApiObjectFilter\\Library\\TimezoneFilter'
+            ]
+        ]
+    ]
+];
+```
+
+Masing-masing object provider harus memiliki method sebagai berikut:
+
+### filter(array $cond): ?array
+
+### lastError(): ?string
+
 ## Endpoints
 
 ### APIHOST/-/object/filter?{type,q,...}
